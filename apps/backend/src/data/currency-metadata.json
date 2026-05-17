@@ -1,0 +1,650 @@
+[
+  {
+    "code": "NGN",
+    "central_bank": "Central Bank of Nigeria",
+    "central_bank_url": "https://www.cbn.gov.ng",
+    "exchange_regime": "managed_float",
+    "subunit": "Kobo",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 1000, "label": "₦1,000" },
+      { "denomination": 500,  "label": "₦500" },
+      { "denomination": 200,  "label": "₦200" },
+      { "denomination": 100,  "label": "₦100" },
+      { "denomination": 50,   "label": "₦50" },
+      { "denomination": 20,   "label": "₦20" },
+      { "denomination": 10,   "label": "₦10" },
+      { "denomination": 5,    "label": "₦5" }
+    ],
+    "coins": [
+      { "denomination": 2,    "label": "₦2" },
+      { "denomination": 1,    "label": "₦1" },
+      { "denomination": 0.50, "label": "50k" }
+    ]
+  },
+  {
+    "code": "USD",
+    "central_bank": "Federal Reserve System",
+    "central_bank_url": "https://www.federalreserve.gov",
+    "exchange_regime": "floating",
+    "subunit": "Cent",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 100, "label": "$100" },
+      { "denomination": 50,  "label": "$50" },
+      { "denomination": 20,  "label": "$20" },
+      { "denomination": 10,  "label": "$10" },
+      { "denomination": 5,   "label": "$5" },
+      { "denomination": 2,   "label": "$2" },
+      { "denomination": 1,   "label": "$1" }
+    ],
+    "coins": [
+      { "denomination": 1,    "label": "$1" },
+      { "denomination": 0.50, "label": "50¢" },
+      { "denomination": 0.25, "label": "25¢" },
+      { "denomination": 0.10, "label": "10¢" },
+      { "denomination": 0.05, "label": "5¢" },
+      { "denomination": 0.01, "label": "1¢" }
+    ]
+  },
+  {
+    "code": "EUR",
+    "central_bank": "European Central Bank",
+    "central_bank_url": "https://www.ecb.europa.eu",
+    "exchange_regime": "floating",
+    "subunit": "Cent",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 500, "label": "€500" },
+      { "denomination": 200, "label": "€200" },
+      { "denomination": 100, "label": "€100" },
+      { "denomination": 50,  "label": "€50" },
+      { "denomination": 20,  "label": "€20" },
+      { "denomination": 10,  "label": "€10" },
+      { "denomination": 5,   "label": "€5" }
+    ],
+    "coins": [
+      { "denomination": 2,    "label": "€2" },
+      { "denomination": 1,    "label": "€1" },
+      { "denomination": 0.50, "label": "50c" },
+      { "denomination": 0.20, "label": "20c" },
+      { "denomination": 0.10, "label": "10c" },
+      { "denomination": 0.05, "label": "5c" },
+      { "denomination": 0.02, "label": "2c" },
+      { "denomination": 0.01, "label": "1c" }
+    ]
+  },
+  {
+    "code": "GBP",
+    "central_bank": "Bank of England",
+    "central_bank_url": "https://www.bankofengland.co.uk",
+    "exchange_regime": "floating",
+    "subunit": "Penny",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 50,  "label": "£50" },
+      { "denomination": 20,  "label": "£20" },
+      { "denomination": 10,  "label": "£10" },
+      { "denomination": 5,   "label": "£5" }
+    ],
+    "coins": [
+      { "denomination": 2,    "label": "£2" },
+      { "denomination": 1,    "label": "£1" },
+      { "denomination": 0.50, "label": "50p" },
+      { "denomination": 0.20, "label": "20p" },
+      { "denomination": 0.10, "label": "10p" },
+      { "denomination": 0.05, "label": "5p" },
+      { "denomination": 0.02, "label": "2p" },
+      { "denomination": 0.01, "label": "1p" }
+    ]
+  },
+  {
+    "code": "JPY",
+    "central_bank": "Bank of Japan",
+    "central_bank_url": "https://www.boj.or.jp/en",
+    "exchange_regime": "floating",
+    "subunit": "Sen",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 10000, "label": "¥10,000" },
+      { "denomination": 5000,  "label": "¥5,000" },
+      { "denomination": 2000,  "label": "¥2,000" },
+      { "denomination": 1000,  "label": "¥1,000" }
+    ],
+    "coins": [
+      { "denomination": 500, "label": "¥500" },
+      { "denomination": 100, "label": "¥100" },
+      { "denomination": 50,  "label": "¥50" },
+      { "denomination": 10,  "label": "¥10" },
+      { "denomination": 5,   "label": "¥5" },
+      { "denomination": 1,   "label": "¥1" }
+    ]
+  },
+  {
+    "code": "CAD",
+    "central_bank": "Bank of Canada",
+    "central_bank_url": "https://www.bankofcanada.ca",
+    "exchange_regime": "floating",
+    "subunit": "Cent",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 100, "label": "CA$100" },
+      { "denomination": 50,  "label": "CA$50" },
+      { "denomination": 20,  "label": "CA$20" },
+      { "denomination": 10,  "label": "CA$10" },
+      { "denomination": 5,   "label": "CA$5" }
+    ],
+    "coins": [
+      { "denomination": 2,    "label": "CA$2" },
+      { "denomination": 1,    "label": "CA$1" },
+      { "denomination": 0.25, "label": "25¢" },
+      { "denomination": 0.10, "label": "10¢" },
+      { "denomination": 0.05, "label": "5¢" }
+    ]
+  },
+  {
+    "code": "AUD",
+    "central_bank": "Reserve Bank of Australia",
+    "central_bank_url": "https://www.rba.gov.au",
+    "exchange_regime": "floating",
+    "subunit": "Cent",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 100, "label": "A$100" },
+      { "denomination": 50,  "label": "A$50" },
+      { "denomination": 20,  "label": "A$20" },
+      { "denomination": 10,  "label": "A$10" },
+      { "denomination": 5,   "label": "A$5" }
+    ],
+    "coins": [
+      { "denomination": 2,    "label": "A$2" },
+      { "denomination": 1,    "label": "A$1" },
+      { "denomination": 0.50, "label": "50c" },
+      { "denomination": 0.20, "label": "20c" },
+      { "denomination": 0.10, "label": "10c" },
+      { "denomination": 0.05, "label": "5c" }
+    ]
+  },
+  {
+    "code": "CHF",
+    "central_bank": "Swiss National Bank",
+    "central_bank_url": "https://www.snb.ch",
+    "exchange_regime": "floating",
+    "subunit": "Rappen",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 1000, "label": "Fr.1000" },
+      { "denomination": 200,  "label": "Fr.200" },
+      { "denomination": 100,  "label": "Fr.100" },
+      { "denomination": 50,   "label": "Fr.50" },
+      { "denomination": 20,   "label": "Fr.20" },
+      { "denomination": 10,   "label": "Fr.10" }
+    ],
+    "coins": [
+      { "denomination": 5,    "label": "Fr.5" },
+      { "denomination": 2,    "label": "Fr.2" },
+      { "denomination": 1,    "label": "Fr.1" },
+      { "denomination": 0.50, "label": "50Rp" },
+      { "denomination": 0.20, "label": "20Rp" },
+      { "denomination": 0.10, "label": "10Rp" },
+      { "denomination": 0.05, "label": "5Rp" }
+    ]
+  },
+  {
+    "code": "CNY",
+    "central_bank": "People's Bank of China",
+    "central_bank_url": "http://www.pbc.gov.cn/en",
+    "exchange_regime": "managed_float",
+    "subunit": "Fen",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 100, "label": "¥100" },
+      { "denomination": 50,  "label": "¥50" },
+      { "denomination": 20,  "label": "¥20" },
+      { "denomination": 10,  "label": "¥10" },
+      { "denomination": 5,   "label": "¥5" },
+      { "denomination": 1,   "label": "¥1" }
+    ],
+    "coins": [
+      { "denomination": 1,    "label": "¥1" },
+      { "denomination": 0.50, "label": "5 Jiao" },
+      { "denomination": 0.10, "label": "1 Jiao" }
+    ]
+  },
+  {
+    "code": "INR",
+    "central_bank": "Reserve Bank of India",
+    "central_bank_url": "https://www.rbi.org.in",
+    "exchange_regime": "managed_float",
+    "subunit": "Paisa",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 2000, "label": "₹2,000" },
+      { "denomination": 500,  "label": "₹500" },
+      { "denomination": 200,  "label": "₹200" },
+      { "denomination": 100,  "label": "₹100" },
+      { "denomination": 50,   "label": "₹50" },
+      { "denomination": 20,   "label": "₹20" },
+      { "denomination": 10,   "label": "₹10" }
+    ],
+    "coins": [
+      { "denomination": 20,   "label": "₹20" },
+      { "denomination": 10,   "label": "₹10" },
+      { "denomination": 5,    "label": "₹5" },
+      { "denomination": 2,    "label": "₹2" },
+      { "denomination": 1,    "label": "₹1" }
+    ]
+  },
+  {
+    "code": "ZAR",
+    "central_bank": "South African Reserve Bank",
+    "central_bank_url": "https://www.resbank.co.za",
+    "exchange_regime": "floating",
+    "subunit": "Cent",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 200, "label": "R200" },
+      { "denomination": 100, "label": "R100" },
+      { "denomination": 50,  "label": "R50" },
+      { "denomination": 20,  "label": "R20" },
+      { "denomination": 10,  "label": "R10" }
+    ],
+    "coins": [
+      { "denomination": 5,    "label": "R5" },
+      { "denomination": 2,    "label": "R2" },
+      { "denomination": 1,    "label": "R1" },
+      { "denomination": 0.50, "label": "50c" },
+      { "denomination": 0.20, "label": "20c" },
+      { "denomination": 0.10, "label": "10c" },
+      { "denomination": 0.05, "label": "5c" }
+    ]
+  },
+  {
+    "code": "GHS",
+    "central_bank": "Bank of Ghana",
+    "central_bank_url": "https://www.bog.gov.gh",
+    "exchange_regime": "floating",
+    "subunit": "Pesewa",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 200, "label": "GH₵200" },
+      { "denomination": 100, "label": "GH₵100" },
+      { "denomination": 50,  "label": "GH₵50" },
+      { "denomination": 20,  "label": "GH₵20" },
+      { "denomination": 10,  "label": "GH₵10" },
+      { "denomination": 5,   "label": "GH₵5" },
+      { "denomination": 2,   "label": "GH₵2" },
+      { "denomination": 1,   "label": "GH₵1" }
+    ],
+    "coins": [
+      { "denomination": 1,    "label": "GH₵1" },
+      { "denomination": 0.50, "label": "50Gp" },
+      { "denomination": 0.20, "label": "20Gp" },
+      { "denomination": 0.10, "label": "10Gp" },
+      { "denomination": 0.05, "label": "5Gp" }
+    ]
+  },
+  {
+    "code": "KES",
+    "central_bank": "Central Bank of Kenya",
+    "central_bank_url": "https://www.centralbank.go.ke",
+    "exchange_regime": "floating",
+    "subunit": "Cent",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 1000, "label": "KSh1,000" },
+      { "denomination": 500,  "label": "KSh500" },
+      { "denomination": 200,  "label": "KSh200" },
+      { "denomination": 100,  "label": "KSh100" },
+      { "denomination": 50,   "label": "KSh50" }
+    ],
+    "coins": [
+      { "denomination": 20,  "label": "KSh20" },
+      { "denomination": 10,  "label": "KSh10" },
+      { "denomination": 5,   "label": "KSh5" },
+      { "denomination": 1,   "label": "KSh1" }
+    ]
+  },
+  {
+    "code": "EGP",
+    "central_bank": "Central Bank of Egypt",
+    "central_bank_url": "https://www.cbe.org.eg",
+    "exchange_regime": "floating",
+    "subunit": "Piastre",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 200, "label": "E£200" },
+      { "denomination": 100, "label": "E£100" },
+      { "denomination": 50,  "label": "E£50" },
+      { "denomination": 20,  "label": "E£20" },
+      { "denomination": 10,  "label": "E£10" },
+      { "denomination": 5,   "label": "E£5" }
+    ],
+    "coins": [
+      { "denomination": 1,    "label": "E£1" },
+      { "denomination": 0.50, "label": "50pt" },
+      { "denomination": 0.25, "label": "25pt" }
+    ]
+  },
+  {
+    "code": "BRL",
+    "central_bank": "Banco Central do Brasil",
+    "central_bank_url": "https://www.bcb.gov.br",
+    "exchange_regime": "floating",
+    "subunit": "Centavo",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 200, "label": "R$200" },
+      { "denomination": 100, "label": "R$100" },
+      { "denomination": 50,  "label": "R$50" },
+      { "denomination": 20,  "label": "R$20" },
+      { "denomination": 10,  "label": "R$10" },
+      { "denomination": 5,   "label": "R$5" },
+      { "denomination": 2,   "label": "R$2" }
+    ],
+    "coins": [
+      { "denomination": 1,    "label": "R$1" },
+      { "denomination": 0.50, "label": "50c" },
+      { "denomination": 0.25, "label": "25c" },
+      { "denomination": 0.10, "label": "10c" },
+      { "denomination": 0.05, "label": "5c" }
+    ]
+  },
+  {
+    "code": "MXN",
+    "central_bank": "Banco de México",
+    "central_bank_url": "https://www.banxico.org.mx",
+    "exchange_regime": "floating",
+    "subunit": "Centavo",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 1000, "label": "MX$1,000" },
+      { "denomination": 500,  "label": "MX$500" },
+      { "denomination": 200,  "label": "MX$200" },
+      { "denomination": 100,  "label": "MX$100" },
+      { "denomination": 50,   "label": "MX$50" },
+      { "denomination": 20,   "label": "MX$20" }
+    ],
+    "coins": [
+      { "denomination": 10,   "label": "MX$10" },
+      { "denomination": 5,    "label": "MX$5" },
+      { "denomination": 2,    "label": "MX$2" },
+      { "denomination": 1,    "label": "MX$1" },
+      { "denomination": 0.50, "label": "50c" }
+    ]
+  },
+  {
+    "code": "SGD",
+    "central_bank": "Monetary Authority of Singapore",
+    "central_bank_url": "https://www.mas.gov.sg",
+    "exchange_regime": "managed_float",
+    "subunit": "Cent",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 1000, "label": "S$1,000" },
+      { "denomination": 100,  "label": "S$100" },
+      { "denomination": 50,   "label": "S$50" },
+      { "denomination": 10,   "label": "S$10" },
+      { "denomination": 5,    "label": "S$5" },
+      { "denomination": 2,    "label": "S$2" }
+    ],
+    "coins": [
+      { "denomination": 1,    "label": "S$1" },
+      { "denomination": 0.50, "label": "50c" },
+      { "denomination": 0.20, "label": "20c" },
+      { "denomination": 0.10, "label": "10c" },
+      { "denomination": 0.05, "label": "5c" }
+    ]
+  },
+  {
+    "code": "AED",
+    "central_bank": "Central Bank of the UAE",
+    "central_bank_url": "https://www.centralbank.ae",
+    "exchange_regime": "pegged",
+    "subunit": "Fils",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 1000, "label": "د.إ1,000" },
+      { "denomination": 500,  "label": "د.إ500" },
+      { "denomination": 200,  "label": "د.إ200" },
+      { "denomination": 100,  "label": "د.إ100" },
+      { "denomination": 50,   "label": "د.إ50" },
+      { "denomination": 20,   "label": "د.إ20" },
+      { "denomination": 10,   "label": "د.إ10" },
+      { "denomination": 5,    "label": "د.إ5" }
+    ],
+    "coins": [
+      { "denomination": 1,    "label": "د.إ1" },
+      { "denomination": 0.50, "label": "50f" },
+      { "denomination": 0.25, "label": "25f" },
+      { "denomination": 0.10, "label": "10f" },
+      { "denomination": 0.05, "label": "5f" }
+    ]
+  },
+  {
+    "code": "SAR",
+    "central_bank": "Saudi Central Bank (SAMA)",
+    "central_bank_url": "https://www.sama.gov.sa",
+    "exchange_regime": "pegged",
+    "subunit": "Hallala",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 500, "label": "﷼500" },
+      { "denomination": 100, "label": "﷼100" },
+      { "denomination": 50,  "label": "﷼50" },
+      { "denomination": 10,  "label": "﷼10" },
+      { "denomination": 5,   "label": "﷼5" },
+      { "denomination": 1,   "label": "﷼1" }
+    ],
+    "coins": [
+      { "denomination": 1,    "label": "﷼1" },
+      { "denomination": 0.50, "label": "50h" },
+      { "denomination": 0.25, "label": "25h" },
+      { "denomination": 0.10, "label": "10h" },
+      { "denomination": 0.05, "label": "5h" }
+    ]
+  },
+  {
+    "code": "TRY",
+    "central_bank": "Central Bank of the Republic of Turkey",
+    "central_bank_url": "https://www.tcmb.gov.tr/en",
+    "exchange_regime": "floating",
+    "subunit": "Kuruş",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 200, "label": "₺200" },
+      { "denomination": 100, "label": "₺100" },
+      { "denomination": 50,  "label": "₺50" },
+      { "denomination": 20,  "label": "₺20" },
+      { "denomination": 10,  "label": "₺10" },
+      { "denomination": 5,   "label": "₺5" }
+    ],
+    "coins": [
+      { "denomination": 1,    "label": "₺1" },
+      { "denomination": 0.50, "label": "50kr" },
+      { "denomination": 0.25, "label": "25kr" },
+      { "denomination": 0.10, "label": "10kr" },
+      { "denomination": 0.05, "label": "5kr" }
+    ]
+  },
+  {
+    "code": "SEK",
+    "central_bank": "Sveriges Riksbank",
+    "central_bank_url": "https://www.riksbank.se/en-gb",
+    "exchange_regime": "floating",
+    "subunit": "Öre",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 1000, "label": "kr1,000" },
+      { "denomination": 500,  "label": "kr500" },
+      { "denomination": 200,  "label": "kr200" },
+      { "denomination": 100,  "label": "kr100" },
+      { "denomination": 50,   "label": "kr50" },
+      { "denomination": 20,   "label": "kr20" }
+    ],
+    "coins": [
+      { "denomination": 10,  "label": "kr10" },
+      { "denomination": 5,   "label": "kr5" },
+      { "denomination": 2,   "label": "kr2" },
+      { "denomination": 1,   "label": "kr1" }
+    ]
+  },
+  {
+    "code": "NOK",
+    "central_bank": "Norges Bank",
+    "central_bank_url": "https://www.norges-bank.no/en",
+    "exchange_regime": "floating",
+    "subunit": "Øre",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 1000, "label": "kr1,000" },
+      { "denomination": 500,  "label": "kr500" },
+      { "denomination": 200,  "label": "kr200" },
+      { "denomination": 100,  "label": "kr100" },
+      { "denomination": 50,   "label": "kr50" }
+    ],
+    "coins": [
+      { "denomination": 20,  "label": "kr20" },
+      { "denomination": 10,  "label": "kr10" },
+      { "denomination": 5,   "label": "kr5" },
+      { "denomination": 1,   "label": "kr1" }
+    ]
+  },
+  {
+    "code": "DKK",
+    "central_bank": "Danmarks Nationalbank",
+    "central_bank_url": "https://www.nationalbanken.dk/en",
+    "exchange_regime": "pegged",
+    "subunit": "Øre",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 1000, "label": "kr1,000" },
+      { "denomination": 500,  "label": "kr500" },
+      { "denomination": 200,  "label": "kr200" },
+      { "denomination": 100,  "label": "kr100" },
+      { "denomination": 50,   "label": "kr50" }
+    ],
+    "coins": [
+      { "denomination": 20,   "label": "kr20" },
+      { "denomination": 10,   "label": "kr10" },
+      { "denomination": 5,    "label": "kr5" },
+      { "denomination": 2,    "label": "kr2" },
+      { "denomination": 1,    "label": "kr1" },
+      { "denomination": 0.50, "label": "50ø" }
+    ]
+  },
+  {
+    "code": "NZD",
+    "central_bank": "Reserve Bank of New Zealand",
+    "central_bank_url": "https://www.rbnz.govt.nz",
+    "exchange_regime": "floating",
+    "subunit": "Cent",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 100, "label": "NZ$100" },
+      { "denomination": 50,  "label": "NZ$50" },
+      { "denomination": 20,  "label": "NZ$20" },
+      { "denomination": 10,  "label": "NZ$10" },
+      { "denomination": 5,   "label": "NZ$5" }
+    ],
+    "coins": [
+      { "denomination": 2,    "label": "NZ$2" },
+      { "denomination": 1,    "label": "NZ$1" },
+      { "denomination": 0.50, "label": "50c" },
+      { "denomination": 0.20, "label": "20c" },
+      { "denomination": 0.10, "label": "10c" }
+    ]
+  },
+  {
+    "code": "HKD",
+    "central_bank": "Hong Kong Monetary Authority",
+    "central_bank_url": "https://www.hkma.gov.hk",
+    "exchange_regime": "pegged",
+    "subunit": "Cent",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 1000, "label": "HK$1,000" },
+      { "denomination": 500,  "label": "HK$500" },
+      { "denomination": 100,  "label": "HK$100" },
+      { "denomination": 50,   "label": "HK$50" },
+      { "denomination": 20,   "label": "HK$20" },
+      { "denomination": 10,   "label": "HK$10" }
+    ],
+    "coins": [
+      { "denomination": 10,   "label": "HK$10" },
+      { "denomination": 5,    "label": "HK$5" },
+      { "denomination": 2,    "label": "HK$2" },
+      { "denomination": 1,    "label": "HK$1" },
+      { "denomination": 0.50, "label": "50c" },
+      { "denomination": 0.20, "label": "20c" },
+      { "denomination": 0.10, "label": "10c" }
+    ]
+  },
+  {
+    "code": "KRW",
+    "central_bank": "Bank of Korea",
+    "central_bank_url": "https://www.bok.or.kr/eng",
+    "exchange_regime": "floating",
+    "subunit": "Jeon",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 50000, "label": "₩50,000" },
+      { "denomination": 10000, "label": "₩10,000" },
+      { "denomination": 5000,  "label": "₩5,000" },
+      { "denomination": 1000,  "label": "₩1,000" }
+    ],
+    "coins": [
+      { "denomination": 500, "label": "₩500" },
+      { "denomination": 100, "label": "₩100" },
+      { "denomination": 50,  "label": "₩50" },
+      { "denomination": 10,  "label": "₩10" }
+    ]
+  },
+  {
+    "code": "XOF",
+    "central_bank": "Central Bank of West African States (BCEAO)",
+    "central_bank_url": "https://www.bceao.int",
+    "exchange_regime": "pegged",
+    "subunit": "Centime",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 10000, "label": "Fr10,000" },
+      { "denomination": 5000,  "label": "Fr5,000" },
+      { "denomination": 2000,  "label": "Fr2,000" },
+      { "denomination": 1000,  "label": "Fr1,000" },
+      { "denomination": 500,   "label": "Fr500" }
+    ],
+    "coins": [
+      { "denomination": 500, "label": "Fr500" },
+      { "denomination": 200, "label": "Fr200" },
+      { "denomination": 100, "label": "Fr100" },
+      { "denomination": 50,  "label": "Fr50" },
+      { "denomination": 25,  "label": "Fr25" },
+      { "denomination": 10,  "label": "Fr10" },
+      { "denomination": 5,   "label": "Fr5" }
+    ]
+  },
+  {
+    "code": "XAF",
+    "central_bank": "Bank of Central African States (BEAC)",
+    "central_bank_url": "https://www.beac.int",
+    "exchange_regime": "pegged",
+    "subunit": "Centime",
+    "subunit_to_unit": 100,
+    "banknotes": [
+      { "denomination": 10000, "label": "Fr10,000" },
+      { "denomination": 5000,  "label": "Fr5,000" },
+      { "denomination": 2000,  "label": "Fr2,000" },
+      { "denomination": 1000,  "label": "Fr1,000" },
+      { "denomination": 500,   "label": "Fr500" }
+    ],
+    "coins": [
+      { "denomination": 500, "label": "Fr500" },
+      { "denomination": 100, "label": "Fr100" },
+      { "denomination": 50,  "label": "Fr50" },
+      { "denomination": 25,  "label": "Fr25" },
+      { "denomination": 10,  "label": "Fr10" },
+      { "denomination": 5,   "label": "Fr5" }
+    ]
+  }
+]

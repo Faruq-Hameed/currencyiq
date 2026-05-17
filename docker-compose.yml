@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: currencyiq
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redisdata:/data
+
+  backend:
+    build: ./apps/backend
+    ports:
+      - "3001:3001"
+    env_file: ./apps/backend/.env
+    depends_on:
+      - postgres
+      - redis
+
+  frontend:
+    build: ./apps/frontend
+    ports:
+      - "3000:3000"
+    env_file: ./apps/frontend/.env.local
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
+  redisdata:
