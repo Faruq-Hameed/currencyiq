@@ -26,6 +26,7 @@ export default () => ({
     openExchangeAppId: process.env.OPEN_EXCHANGE_APP_ID || '',
     exchangeRateApiKey: process.env.EXCHANGERATE_API_KEY || '',
     currencyFreaksApiKey: process.env.CURRENCYFREAKS_API_KEY || '',
+    restCountriesApiKey: process.env.RESTCOUNTRIES_API_KEY || '',
   },
   smtp: {
     host: process.env.SMTP_HOST || '',

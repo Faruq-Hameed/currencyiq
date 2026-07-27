@@ -51,6 +51,7 @@ npm run dev
 | `OPEN_EXCHANGE_APP_ID` | Open Exchange Rates API key |
 | `EXCHANGERATE_API_KEY` | ExchangeRate-API key |
 | `CURRENCYFREAKS_API_KEY` | CurrencyFreaks API key |
+| `RESTCOUNTRIES_API_KEY` | RestCountries API key (used once, at first boot, to seed currency names/symbols/flags — see below) |
 | `CRON_SECRET` | Vercel-only: shared secret for triggering `/internal/cron/*` endpoints (see [Deploying to Vercel](#deploying-to-vercel)) |
 
 ### Frontend (`apps/frontend/.env.local`)
@@ -106,6 +107,7 @@ schema changes don't mix well.
 | `OPEN_EXCHANGE_APP_ID` | Free account at [openexchangerates.org](https://openexchangerates.org) → App IDs page | Rates provider #1 |
 | `EXCHANGERATE_API_KEY` | Free account at [exchangerate-api.com](https://www.exchangerate-api.com) → Dashboard | Rates provider #3 |
 | `CURRENCYFREAKS_API_KEY` | Free account at [currencyfreaks.com](https://currencyfreaks.com) → Dashboard | Rates provider #4 |
+| `RESTCOUNTRIES_API_KEY` | Sign up at [restcountries.com/sign-up](https://restcountries.com/sign-up) → copy the key from your account dashboard. Only used once per deploy, at first boot with an empty database, to populate currency names/symbols/flags/country lists (the old free, keyless `v3.1` API this used to hit was deprecated — `v5` requires this key). Without it, the currencies table stays empty and `/api/v1/currencies` returns nothing. | Backend currency seeding |
 | `CRON_SECRET` | Generate one yourself: `openssl rand -hex 32`. Set the **same value** as a Vercel env var — Vercel automatically sends it as `Authorization: Bearer <value>` when triggering your cron paths. | Backend cron auth |
 | `FRONTEND_URL` | The deployed frontend's Vercel URL (for CORS) | Backend |
 | `NEXT_PUBLIC_API_URL` | The deployed backend's Vercel URL + `/api/v1` | Frontend |

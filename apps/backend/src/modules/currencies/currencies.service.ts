@@ -1,5 +1,6 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ConfigService } from '@nestjs/config';
 import { Repository, Like, DataSource } from 'typeorm';
 import axios from 'axios';
 import { Currency } from './entities/currency.entity';
@@ -42,6 +43,7 @@ export class CurrenciesService {
     @InjectRepository(Banknote) private banknoteRepo: Repository<Banknote>,
     private redis: RedisService,
     private dataSource: DataSource,
+    private config: ConfigService,
   ) {}
 
   // ─── Public API ──────────────────────────────────────────────────────────────
@@ -104,14 +106,37 @@ export class CurrenciesService {
     this.logger.log('Pass 9a: fetching RestCountries…');
 
     let countries: any[] = [];
-    try {
-      const { data } = await axios.get(
-        'https://restcountries.com/v3.1/all?fields=name,currencies,flags,cca2,region,subregion',
-        { timeout: 20000 },
-      );
-      countries = data;
-    } catch (e) {
-      this.logger.error('RestCountries fetch failed — skipping pass 9a, will still run static enrichment', e.message);
+    const apiKey = this.config.get<string>('providers.restCountriesApiKey');
+    if (!apiKey) {
+      this.logger.warn('RESTCOUNTRIES_API_KEY not set — skipping pass 9a, will still run static enrichment');
+    } else {
+      try {
+        // Free plan caps at 100 objects/request, so paginate via offset until `more` is false.
+        const limit = 100;
+        let offset = 0;
+        for (;;) {
+          const { data } = await axios.get('https://api.restcountries.com/countries/v5', {
+            timeout: 20000,
+            headers: { Authorization: `Bearer ${apiKey}` },
+            params: {
+              response_fields: 'names.common,codes.alpha_2,currencies,region,subregion',
+              limit,
+              offset,
+            },
+          });
+          const objects = data?.data?.objects;
+          if (!Array.isArray(objects)) {
+            this.logger.error(`RestCountries returned an unexpected response — stopping pass 9a: ${JSON.stringify(data).slice(0, 300)}`);
+            break;
+          }
+          countries.push(...objects);
+          if (!data.data.meta?.more) break;
+          offset += limit;
+        }
+      } catch (e) {
+        this.logger.error('RestCountries fetch failed — skipping pass 9a, will still run static enrichment', e.message);
+        countries = [];
+      }
     }
 
     // Build currency map from RestCountries response
@@ -122,8 +147,10 @@ export class CurrenciesService {
       >();
 
       for (const country of countries) {
-        if (!country.currencies) continue;
-        for (const [code, info] of Object.entries<any>(country.currencies)) {
+        if (!Array.isArray(country.currencies)) continue;
+        for (const info of country.currencies as Array<{ code: string; name?: string; symbol?: string }>) {
+          const code = info.code;
+          if (!code) continue;
           if (!currencyMap.has(code)) {
             currencyMap.set(code, {
               name: info.name || code,
@@ -133,8 +160,8 @@ export class CurrenciesService {
             });
           }
           const entry = currencyMap.get(code)!;
-          if (country.name?.common) entry.countries.push(country.name.common);
-          if (country.cca2) entry.country_codes.push(country.cca2.toLowerCase());
+          if (country.names?.common) entry.countries.push(country.names.common);
+          if (country.codes?.alpha_2) entry.country_codes.push(country.codes.alpha_2.toLowerCase());
         }
       }
 
