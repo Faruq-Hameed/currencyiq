@@ -35,9 +35,16 @@ import { CurrenciesService } from './modules/currencies/currencies.service';
         entities: [User, ApiKey, Currency, Banknote, ExchangeRate, ProviderUsage, ApiUsageLog],
         synchronize: true,
         logging: config.get<string>('nodeEnv') === 'development',
+        ssl: config.get<boolean>('database.ssl') ? { rejectUnauthorized: false } : false,
+        // Serverless functions run many concurrent, short-lived processes — cap the pool
+        // per-instance so a burst of cold starts doesn't exhaust the DB's connection limit.
+        extra: process.env.VERCEL ? { max: 1 } : undefined,
       }),
     }),
-    ScheduleModule.forRoot(),
+    // @nestjs/schedule keeps setInterval/cron timers alive in-process, which only makes sense
+    // on long-running hosts. On Vercel, functions don't stay alive between requests, so scheduling
+    // here would silently never fire — CronController's HTTP endpoints + vercel.json `crons` replace it.
+    ...(process.env.VERCEL ? [] : [ScheduleModule.forRoot()]),
     RedisModule,
     AuthModule,
     UsersModule,

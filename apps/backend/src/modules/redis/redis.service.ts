@@ -8,12 +8,16 @@ export class RedisService implements OnModuleDestroy {
   private client: Redis;
 
   constructor(private config: ConfigService) {
-    this.client = new Redis({
-      host: config.get<string>('redis.host') || 'localhost',
-      port: config.get<number>('redis.port') || 6379,
-      password: config.get<string>('redis.password') || undefined,
-      lazyConnect: true,
-    });
+    const url = config.get<string>('redis.url');
+    this.client = url
+      ? new Redis(url, { lazyConnect: true })
+      : new Redis({
+          host: config.get<string>('redis.host') || 'localhost',
+          port: config.get<number>('redis.port') || 6379,
+          password: config.get<string>('redis.password') || undefined,
+          tls: config.get<boolean>('redis.tls') ? {} : undefined,
+          lazyConnect: true,
+        });
     this.client.on('error', (err) => this.logger.error('Redis error', err));
     this.client.connect().catch(() => this.logger.warn('Redis not connected — caching disabled'));
   }

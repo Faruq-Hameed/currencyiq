@@ -18,6 +18,7 @@ import { ThrottleModule } from '../throttle/throttle.module';
 import { CurrenciesModule } from '../currencies/currencies.module';
 import { UsageController } from './usage.controller';
 import { UsageLoggerInterceptor } from '../../common/interceptors/usage-logger.interceptor';
+import { CronController } from './cron.controller';
 
 @Module({
   imports: [
@@ -40,7 +41,7 @@ import { UsageLoggerInterceptor } from '../../common/interceptors/usage-logger.i
       useClass: UsageLoggerInterceptor,
     },
   ],
-  controllers: [RatesController, UsageController],
+  controllers: [RatesController, UsageController, CronController],
   exports: [RatesService, ProviderManagerService, TypeOrmModule],
 })
 export class RatesModule {}

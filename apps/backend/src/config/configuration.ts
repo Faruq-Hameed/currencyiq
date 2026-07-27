@@ -8,16 +8,20 @@ export default () => ({
     name: process.env.DB_NAME || 'currencyiq',
     user: process.env.DB_USER || 'postgres',
     pass: process.env.DB_PASS || 'secret',
+    ssl: process.env.DB_SSL === 'true',
   },
   redis: {
     host: process.env.REDIS_HOST || 'localhost',
     port: parseInt(process.env.REDIS_PORT || '6379', 10),
     password: process.env.REDIS_PASSWORD || '',
+    url: process.env.REDIS_URL || '',
+    tls: process.env.REDIS_TLS === 'true',
   },
   jwt: {
     secret: process.env.JWT_SECRET || 'changeme',
     expiresIn: process.env.JWT_EXPIRES_IN || '7d',
   },
+  cronSecret: process.env.CRON_SECRET || '',
   providers: {
     openExchangeAppId: process.env.OPEN_EXCHANGE_APP_ID || '',
     exchangeRateApiKey: process.env.EXCHANGERATE_API_KEY || '',
