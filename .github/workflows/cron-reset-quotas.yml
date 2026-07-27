@@ -1,0 +1,15 @@
+name: Cron - Reset Provider Quotas
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+  workflow_dispatch: {}
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call /internal/cron/reset-quotas
+        run: |
+          curl -sf -X GET "${{ secrets.BACKEND_URL }}/api/v1/internal/cron/reset-quotas" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"

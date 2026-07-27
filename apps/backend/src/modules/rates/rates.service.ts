@@ -152,26 +152,31 @@ export class RatesService {
   }
 
   async syncAllRates(bases: string[]): Promise<void> {
-    for (const base of bases) {
-      try {
-        const { rates, provider } = await this.providerManager.getRates(base);
-        const now = new Date();
-        const entities = Object.entries(rates).map(([quote, rate]) => ({
-          base,
-          quote,
-          rate,
-          provider,
-          fetched_at: now,
-        }));
-        // Each sync is a fresh historical snapshot — insert new rows
-        await this.ratesRepo.insert(entities).catch(() => {
-          // Batch insert on conflict (same second) — skip silently
-        });
-        await this.redis.setJson(`rates:all:${base}`, { rates, fetched_at: now.toISOString(), source: provider }, HOUR);
-      } catch (e) {
-        this.logger.error(`Failed to sync rates for ${base}: ${e.message}`);
-      }
-    }
+    // Each base is independent — run concurrently so the whole batch stays well within
+    // a serverless function's time budget instead of paying every provider failover's
+    // latency N times over sequentially.
+    await Promise.all(
+      bases.map(async (base) => {
+        try {
+          const { rates, provider } = await this.providerManager.getRates(base);
+          const now = new Date();
+          const entities = Object.entries(rates).map(([quote, rate]) => ({
+            base,
+            quote,
+            rate,
+            provider,
+            fetched_at: now,
+          }));
+          // Each sync is a fresh historical snapshot — insert new rows
+          await this.ratesRepo.insert(entities).catch(() => {
+            // Batch insert on conflict (same second) — skip silently
+          });
+          await this.redis.setJson(`rates:all:${base}`, { rates, fetched_at: now.toISOString(), source: provider }, HOUR);
+        } catch (e) {
+          this.logger.error(`Failed to sync rates for ${base}: ${e.message}`);
+        }
+      }),
+    );
     await this.redis.set('rates:last_fetched', new Date().toISOString());
   }
 

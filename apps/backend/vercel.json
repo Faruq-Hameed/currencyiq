@@ -8,12 +8,5 @@
   },
   "rewrites": [
     { "source": "/(.*)", "destination": "/api/index" }
-  ],
-  "crons": [
-    { "path": "/api/v1/internal/cron/sync-rates", "schedule": "0 * * * *" },
-    { "path": "/api/v1/internal/cron/check-health", "schedule": "*/10 * * * *" },
-    { "path": "/api/v1/internal/cron/reset-quotas", "schedule": "0 0 1 * *" },
-    { "path": "/api/v1/internal/cron/refresh-metadata", "schedule": "0 2 * * 0" },
-    { "path": "/api/v1/internal/cron/cleanup-rates", "schedule": "0 3 1 */3 *" }
   ]
 }

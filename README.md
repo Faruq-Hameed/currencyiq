@@ -77,19 +77,28 @@ originally relied on two things that assume a long-running process:
 
 1. **In-process cron** (`@nestjs/schedule`, hourly rate sync, quota resets, health
    checks) — now also exposed as HTTP endpoints under `/api/v1/internal/cron/*`,
-   guarded by a `CRON_SECRET` header, and triggered by Vercel Cron Jobs (configured in
-   `apps/backend/vercel.json`). The original `@Cron` jobs still run as before on any
-   non-Vercel host (Docker, Railway, etc.) — only Vercel deploys switch to the HTTP
+   guarded by a `CRON_SECRET` header. The original `@Cron` jobs still run as before on
+   any non-Vercel host (Docker, Railway, etc.) — only Vercel deploys switch to the HTTP
    trigger path.
 2. **A persistent Redis connection** — works fine over Vercel as long as Redis is
    reachable over TCP with TLS (Upstash provides this out of the box).
 
-**Vercel plan limit to know about:** Vercel Cron Jobs on the **Hobby plan** are capped
-at 2 jobs, each running at most once a day. This app's crons need higher frequency
-(every 10 min / hourly), so you'll need **Vercel Pro** for the crons to run as
-configured — or point an external free scheduler (e.g. a GitHub Actions scheduled
-workflow, or cron-job.org) at the same `/api/v1/internal/cron/*` URLs with the same
-`Authorization: Bearer <CRON_SECRET>` header instead of using Vercel's own cron.
+**Triggering the cron endpoints for free:** Vercel Cron Jobs would be the obvious way
+to call `/api/v1/internal/cron/*` on a schedule, but the **Hobby plan** caps them at 2
+jobs running at most once a day — this app needs 5, some as often as every 10 minutes,
+which needs Vercel Pro. To stay fully free, this repo instead uses **GitHub Actions
+scheduled workflows** (`.github/workflows/cron-*.yml`, one per job) to call those same
+endpoints — free with unlimited minutes since this repo is public. Each workflow needs
+two repo secrets (**Settings → Secrets and variables → Actions**):
+
+| Secret | Value |
+|---|---|
+| `BACKEND_URL` | Your deployed backend's Vercel URL, no trailing slash (e.g. `https://currencyiq-backend.vercel.app`) |
+| `CRON_SECRET` | The same value you set as the backend's `CRON_SECRET` env var |
+
+You can trigger any of them manually from the repo's **Actions** tab (each workflow has
+`workflow_dispatch` enabled) to confirm the secrets are wired up correctly before
+waiting for the schedule.
 
 Also: `synchronize: true` is still enabled on the TypeORM config (no migrations exist
 yet in this repo) — fine for getting a first deploy running, but worth replacing with
