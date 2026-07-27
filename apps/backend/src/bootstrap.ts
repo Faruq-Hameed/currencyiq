@@ -12,6 +12,11 @@ export async function createApp(): Promise<INestApplication> {
   const app = await NestFactory.create(AppModule);
   const config = app.get(ConfigService);
 
+  // Behind Vercel (and any single-hop reverse proxy/CDN), req.ip otherwise resolves to
+  // the proxy's own address for every request, collapsing per-IP rate limits into one
+  // shared bucket for all visitors instead of limiting each client individually.
+  app.getHttpAdapter().getInstance().set('trust proxy', true);
+
   const frontendUrl = config.get<string>('frontendUrl') || 'http://localhost:3000';
   app.enableCors({ origin: frontendUrl, credentials: true });
 
