@@ -16,6 +16,8 @@ export default () => ({
     password: process.env.REDIS_PASSWORD || '',
     url: process.env.REDIS_URL || '',
     tls: process.env.REDIS_TLS === 'true',
+    restUrl: process.env.UPSTASH_REDIS_REST_URL || '',
+    restToken: process.env.UPSTASH_REDIS_REST_TOKEN || '',
   },
   jwt: {
     secret: process.env.JWT_SECRET || 'changeme',
