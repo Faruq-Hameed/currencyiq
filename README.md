@@ -44,9 +44,10 @@ npm run dev
 |---|---|
 | `DB_HOST/PORT/NAME/USER/PASS` | PostgreSQL connection |
 | `DB_SSL` | `true` for hosted Postgres requiring SSL (Neon/Supabase/RDS) |
-| `REDIS_HOST/PORT/PASSWORD` | Redis connection |
-| `REDIS_TLS` | `true` if Redis requires TLS |
-| `REDIS_URL` | Single Redis connection string (e.g. Upstash `rediss://...`); overrides the `REDIS_HOST/PORT/PASSWORD/TLS` vars above when set |
+| `REDIS_HOST/PORT/PASSWORD` | Redis connection (local/Docker dev, via `ioredis`) |
+| `REDIS_TLS` | `true` if that Redis requires TLS |
+| `REDIS_URL` | Single `ioredis`-style connection string; overrides `REDIS_HOST/PORT/PASSWORD/TLS` when set |
+| `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` | Upstash's REST API credentials — used instead of the vars above whenever both are set (production/Vercel). No persistent TCP connection, which is what Upstash recommends for serverless. |
 | `JWT_SECRET` | JWT signing secret |
 | `OPEN_EXCHANGE_APP_ID` | Open Exchange Rates API key |
 | `EXCHANGERATE_API_KEY` | ExchangeRate-API key |
@@ -80,8 +81,11 @@ originally relied on two things that assume a long-running process:
    guarded by a `CRON_SECRET` header. The original `@Cron` jobs still run as before on
    any non-Vercel host (Docker, Railway, etc.) — only Vercel deploys switch to the HTTP
    trigger path.
-2. **A persistent Redis connection** — works fine over Vercel as long as Redis is
-   reachable over TCP with TLS (Upstash provides this out of the box).
+2. **A persistent Redis connection** — `RedisService` uses Upstash's REST client
+   (`@upstash/redis`) instead of `ioredis` whenever `UPSTASH_REDIS_REST_URL`/
+   `UPSTASH_REDIS_REST_TOKEN` are set, so there's no TCP connection to keep alive
+   between invocations. Local/Docker dev still uses `ioredis` against a real Redis
+   container.
 
 **Triggering the cron endpoints for free:** Vercel Cron Jobs would be the obvious way
 to call `/api/v1/internal/cron/*` on a schedule, but the **Hobby plan** caps them at 2
@@ -111,7 +115,7 @@ schema changes don't mix well.
 |---|---|---|
 | `DB_HOST` / `DB_PORT` / `DB_NAME` / `DB_USER` / `DB_PASS` | Create a free Postgres on [neon.com](https://neon.com) (or Supabase) → copy the connection string it gives you and split it into these parts. Use the **pooled** connection host if offered (Neon's has `-pooler` in the hostname) — serverless functions open many short-lived connections. | Backend DB |
 | `DB_SSL` | Set to `true` — Neon/Supabase require SSL. | Backend DB |
-| `REDIS_URL` | Create a free Redis on [upstash.com](https://upstash.com) → Redis tab → copy the `rediss://...` connection string it shows you. | Backend caching/rate-limiting |
+| `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` | Create a free Redis database at [upstash.com](https://upstash.com) (GitHub OAuth works, no card needed) → its dashboard page shows both values directly under "REST API". Note: Vercel's own Upstash *Marketplace* integration only offers paid plans — sign up at upstash.com directly instead to get the real free tier. | Backend caching/rate-limiting |
 | `JWT_SECRET` | Generate one yourself, don't reuse the dev default: `openssl rand -hex 32` | Backend auth |
 | `OPEN_EXCHANGE_APP_ID` | Free account at [openexchangerates.org](https://openexchangerates.org) → App IDs page | Rates provider #1 |
 | `EXCHANGERATE_API_KEY` | Free account at [exchangerate-api.com](https://www.exchangerate-api.com) → Dashboard | Rates provider #3 |
@@ -129,17 +133,32 @@ at all.
 
 ### Deploy steps
 
-1. Provision Postgres (Neon/Supabase) and Redis (Upstash) using the links above.
-2. Push this repo to GitHub if it isn't already there.
-3. In Vercel: **New Project** → import the repo → set **Root Directory** to
-   `apps/backend` → add all the backend env vars from the table above → Deploy.
-4. In Vercel: **New Project** again → same repo → **Root Directory** `apps/frontend` →
+1. Push this repo to GitHub if it isn't already there.
+2. In Vercel: **New Project** → import the repo → set **Root Directory** to
+   `apps/backend` → Deploy (env vars can be added after, see below).
+3. In Vercel: **New Project** again → same repo → **Root Directory** `apps/frontend` →
    set `NEXT_PUBLIC_API_URL` to the backend project's URL + `/api/v1`, and
    `NEXT_PUBLIC_APP_URL` to this frontend project's own URL → Deploy.
-5. Go back to the backend project's env vars and set `FRONTEND_URL` to the frontend's
-   real URL (needed for CORS), then redeploy the backend.
-6. Hit `https://<backend-url>/api/v1/currencies` once — `synchronize: true` creates the
+4. Provision Postgres: from the **backend** project's dashboard → Storage tab →
+   **Marketplace** → add **Neon** (free plan by default). This auto-injects Neon's own
+   env var names (`PGHOST`, `PGDATABASE`, `PGUSER`, `PGPASSWORD`, ...) — add this app's
+   expected `DB_HOST`/`DB_PORT`/`DB_NAME`/`DB_USER`/`DB_PASS`/`DB_SSL=true` vars using
+   those same values (use the pooled `PGHOST`, the one with `-pooler` in it).
+5. Provision Redis: sign up directly at [upstash.com](https://upstash.com) (not through
+   Vercel's Marketplace — see the credentials table below for why) → create a database →
+   copy `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN` into the backend project's
+   env vars.
+6. Add the remaining backend env vars from the table below (`JWT_SECRET`, `CRON_SECRET`,
+   `RESTCOUNTRIES_API_KEY`, `FRONTEND_URL`, etc.), then redeploy the backend.
+7. Set the two GitHub Actions repo secrets (`BACKEND_URL`, `CRON_SECRET`) — see above —
+   so the cron workflows can reach the deployed backend.
+8. Hit `https://<backend-url>/api/v1/currencies` once — `synchronize: true` creates the
    tables on first boot and `seedIfEmpty()` seeds currency data automatically.
+
+**Root Directory must be set for git-push auto-deploy to work** — if a project was
+linked via the Vercel CLI instead of the steps above, Root Directory isn't set
+automatically and there's no CLI command for it; set it in each project's
+**Settings → General → Root Directory**.
 
 ## API Highlights
 
