@@ -2,6 +2,9 @@
 
 Next.js web application for the CurrencyIQ currency conversion platform. Provides a live currency converter, historical rate charts, rich per-currency metadata pages, and a developer dashboard for managing API keys and monitoring usage.
 
+**Live:** https://currencyiq-frontend.vercel.app — deployed on Vercel (see the
+[root README](../../README.md#deploying-to-vercel) for the full deployment writeup).
+
 ---
 
 ## Features

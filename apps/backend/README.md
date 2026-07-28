@@ -2,6 +2,9 @@
 
 NestJS backend for the CurrencyIQ real-time currency conversion platform. Aggregates live and historical exchange rates from **5 external providers** with automatic failover and quota management, exposes a public REST API with API-key authentication and Redis-backed rate limiting, and serves rich currency metadata sourced from RestCountries.
 
+**Live:** https://currencyiq-backend.vercel.app/api/v1 — deployed on Vercel (see the
+[root README](../../README.md#deploying-to-vercel) for the full deployment writeup).
+
 ---
 
 ## Features

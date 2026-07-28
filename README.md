@@ -2,6 +2,15 @@
 
 A full-stack real-time currency conversion platform.
 
+## Live Deployment
+
+- **Frontend:** https://currencyiq-frontend.vercel.app
+- **Backend API:** https://currencyiq-backend.vercel.app/api/v1
+- **Swagger docs:** disabled in production (non-prod only, see below)
+
+Both auto-deploy from `main` via Vercel's GitHub integration; see
+[Deploying to Vercel](#deploying-to-vercel) for how it's configured.
+
 ## Stack
 - **Backend:** NestJS + TypeORM + PostgreSQL + Redis
 - **Frontend:** Next.js 16 + Tailwind CSS + Recharts + Zustand
